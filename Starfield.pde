@@ -1,14 +1,20 @@
 //objective write code to model a working solar system.
-Ju
-OddballParticle[]sue;
-NormalParticle[]bob;
+
+Particle[]bob;
 void setup()
 {
   background(0);
-  size(2800, 1800);
-  bob= new NormalParticle [60];
-  for (int i=0; i<bob.length; i++)
+  size(500, 500);
+
+  bob= new Particle [60];
+  
+    for (int i=0; i<bob.length; i++){
+    
     bob[i]= new NormalParticle();
+  }
+bob[0]= new OddballParticle();
+bob[1]= new JumboParticle();
+
 }
 
 
@@ -30,42 +36,38 @@ interface Particle
 
   public void move();
 }
-
 class NormalParticle implements Particle
 {
   double myX;
   double myY;
-  double myColor;
+int myColor;
   double myAngle;
   double mySpeed;
   NormalParticle() {
     myX=400;
     myY=350;
 
-    myColor= color((int)Math.random()*255, (int)Math.random()*255, (int)Math.random()*255);
+    myColor= color((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255));
     myAngle=Math.random()*2*Math.PI;
     mySpeed=Math.random()*10;
   }
-
-
-   public void move() {
+ public void move() {
     myX=myX+Math.cos(myAngle)*mySpeed;
     myY=myY+Math.sin(myAngle)*mySpeed;
   }
 
- public void show() {
+  public void show() {
+   fill(myColor);
+   stroke(myColor);
     ellipse((float)myX, (float)myY, 3, 3);
   }
 }
-
-
-
-class OddballParticle //uses an interface
+class OddballParticle implements Particle  //uses an interface
 {
 
   float myX;
   float myY;
-  float myColor;
+  int myColor;
   OddballParticle() {
     myX=150;
     myY=150;
@@ -76,24 +78,16 @@ class OddballParticle //uses an interface
     myX= myX+ (float)(Math.random()*3)-1;
     myY= myY + (float)(Math.random()*3)-1;
   }
-   void draw() {
-     for (int i=0; i<sue.length; i++)
-     sue.[i]show();
-     
-}
   
-
-
-
-
-
-
   void show() {
+  
+  ellipse((float)myX, (float)myY, 32, 34);
   }
 }
 class JumboParticle extends NormalParticle//uses inheritance
 {
   public void show() {
-    ellipse(150, 250, 50, 10);
-  }
+    ellipse((float)myX,(float)myY, 50, 10);
+  
+}
 }
